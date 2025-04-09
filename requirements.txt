@@ -11,3 +11,4 @@ trafilatura
 openai==0.28
 bs4
 python-dotenv
+matplotlib
