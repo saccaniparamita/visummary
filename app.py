@@ -17,11 +17,11 @@ from io import BytesIO
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 
+load_dotenv()
+
 # Groq API Config
 openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_base = "https://api.groq.com/openai/v1"
-
-load_dotenv()
 
 CUSTOM_FONTS = {
     "Default": None,
