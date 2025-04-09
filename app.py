@@ -321,6 +321,14 @@ def create_zip_from_images(image_paths):
 def generate_carousel(pmid_or_text, pdf_file, url_input, tone,
                       bg_color, font_color, logo_file, custom_font_file,
                       translate, num_slides, image_size):
+    
+    def extract_dimensions(size_string):
+        try:
+            size_part = size_string.split("px")[0]
+            width, height = map(int, size_part.split("x"))
+            return width, height
+        except Exception as e:
+            raise ValueError(f"Invalid size format: {size_string}") from e
 
     if pdf_file is not None:
         text = extract_text_from_pdf(pdf_file)
@@ -342,7 +350,10 @@ def generate_carousel(pmid_or_text, pdf_file, url_input, tone,
         final_text = translate_text(final_text, translate)
 
     slides = [clean_slide_text(s) for s in final_text.splitlines() if s.strip()][:num_slides]
-    image_paths = create_carousel_images(slides, bg_color, font_color, custom_font_file, logo_file, image_size)
+    image_width, image_height = extract_dimensions(image_size)
+    image_paths = create_carousel_images(
+        slides, bg_color, font_color, custom_font_file, logo_file, image_width, image_height
+    )
     zip_path = create_zip_from_images(image_paths)
 
     return "Success!", image_paths, zip_path
