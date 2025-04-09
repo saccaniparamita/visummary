@@ -384,4 +384,4 @@ demo = gr.Interface(
     description="Your best ally to summarize PDFs, URLs, or text into Instagram-ready carousel slide images."
 )
 
-demo.launch(debug=True, server_name="0.0.0.0", server_port=8080)
+demo.launch(debug=True, server_name="0.0.0.0", server_port=8080, share=True)
