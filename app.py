@@ -349,7 +349,7 @@ def generate_carousel(pmid_or_text, pdf_file, url_input, tone,
     if translate != "Default / No Translation":
         final_text = translate_text(final_text, translate)
 
-    slides = [clean_slide_text(s) for s in final_text.splitlines() if s.strip()][:num_slides]
+    slides = final_text[:num_slides]
     image_width, image_height = extract_dimensions(image_size)
     image_paths = create_carousel_images(
         slides, bg_color, font_color, custom_font_file, logo_file, image_width, image_height
