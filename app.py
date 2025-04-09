@@ -320,7 +320,7 @@ def create_zip_from_images(image_paths):
 # Main Function
 def generate_carousel(pmid_or_text, pdf_file, url_input, tone,
                       bg_color, font_color, logo_file, custom_font_file,
-                      translate, num_slides, image_size):
+                      translate, image_size, num_slides):
     
     def extract_dimensions(size_string):
         try:
