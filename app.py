@@ -386,5 +386,4 @@ demo = gr.Interface(
 
 demo.launch(debug=True)
 
-!git config --global user.email "your_email@example.com"
-!git config --global user.name "your_username"
+demo.launch(server_name="0.0.0.0", server_port=8080)
