@@ -1,0 +1,13 @@
+gradio
+langchain
+huggingface_hub
+python-dotenv
+requests
+pypdf
+langchain-community
+langchain-core
+pillow
+trafilatura
+openai==0.28
+bs4
+python-dotenv
