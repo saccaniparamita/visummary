@@ -317,47 +317,6 @@ def create_zip_from_images(image_paths):
             zipf.write(img_path, os.path.basename(img_path))
     return zip_path
 
-# Main Function
-def generate_carousel(pmid_or_text, pdf_file, url_input, tone,
-                      bg_color, font_color, logo_file, custom_font_file,
-                      translate, image_size, num_slides):
-    
-    def extract_dimensions(size_string):
-        try:
-            size_part = size_string.split("px")[0]
-            width, height = map(int, size_part.split("x"))
-            return width, height
-        except Exception as e:
-            raise ValueError(f"Invalid size format: {size_string}") from e
-
-    if pdf_file is not None:
-        text = extract_text_from_pdf(pdf_file)
-    elif url_input:
-        text = extract_text_from_url(url_input)
-    elif pmid_or_text.strip().isdigit():
-        text = fetch_pubmed_abstract(pmid_or_text.strip())
-    else:
-        text = pmid_or_text
-
-    if len(text.split()) > 3000:
-        return "❌ Error: Input exceeds 3000-word limit. Please shorten your text and try again.", [], None
-
-    chunks = chunk_text(text)
-    partials = summarize_chunks(chunks, tone)
-    final_text = consolidate_summary(partials, tone, num_slides)
-
-    if translate != "Default / No Translation":
-        final_text = translate_text(final_text, translate)
-
-    slides = final_text[:num_slides]
-    image_width, image_height = extract_dimensions(image_size)
-    image_paths = create_carousel_images(
-        slides, bg_color, font_color, custom_font_file, logo_file, image_width, image_height
-    )
-    zip_path = create_zip_from_images(image_paths)
-
-    return "Success!", image_paths, zip_path
-
 # Gradio UI
 tone_choices = ["Academic", "Casual", "Gen Z", "Storytelling"]
 color_choices = ["white", "black", "#f5f5f5", "#222", "#1e90ff", "#ff4081"]
