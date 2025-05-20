@@ -238,7 +238,7 @@ def create_carousel_images(slides, bg_color, font_color, custom_font_file, logo_
 
     logo = None
     if logo_file is not None:
-        logo = Image.open(logo_file.name).convert("RGBA").resize((120, 120))
+        logo = Image.open(logo_file.name).convert("RGBA")
 
     for i, slide_text in enumerate(slides):
         if not slide_text.strip():
@@ -395,5 +395,4 @@ demo = gr.Interface(
     description="Your best ally to summarize PDFs, URLs, or text into Instagram-ready carousel slide images."
 )
 
-if __name__ == "__main__":
-    demo.launch(debug=True)
+demo.launch(debug=True)
